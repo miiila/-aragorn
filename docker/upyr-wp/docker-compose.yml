@@ -1,0 +1,23 @@
+wordpress-data:
+  image: busybox
+  volumes:
+    - /data/
+  container_name: upyr-wp-data
+
+wordpress:
+ image: wordpress:4.5
+ links:
+   - db:mysql
+ ports:
+   - 8001:80
+ volumes_from:
+   - wordpress-data
+ container_name: upyr-wp-wordpress
+
+db:
+  image: orchardup/mysql
+  environment:
+    MYSQL_ROOT_PASSWORD: ${WP_MYSQL_PASSWD}
+  volumes_from:
+    - wordpress-data
+  container_name: upyr-wp-db
