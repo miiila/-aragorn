@@ -2,6 +2,7 @@ wordpress-data:
   image: busybox
   volumes:
     - ./wordpress:/var/www/html
+    - ./db:/var/lib/mysql
   container_name: upyr-wp-data
 
 wordpress:
